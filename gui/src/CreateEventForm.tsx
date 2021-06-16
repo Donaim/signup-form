@@ -5,7 +5,7 @@ type CallbackEvent = React.FormEvent<HTMLFormElement>
 
 function CreateEventForm() {
     function submit_callback(e: CallbackEvent) {
-        e.preventDefault();
+        // e.preventDefault();
         console.log("TODO");
     }
 
