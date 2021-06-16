@@ -1,9 +1,9 @@
 import React from 'react';
-import { RegisterPage } from './RegisterPage';
+import { CreateEventForm } from './CreateEventForm';
 import './App.css';
 
 function App() {
-  return <RegisterPage />;
+  return <CreateEventForm />;
 }
 
 export default App;
