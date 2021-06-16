@@ -2,8 +2,13 @@
 import React from 'react';
 
 function CreateEventForm() {
+    function submit_callback(e) {
+        e.preventDefault();
+        console.log("TODO");
+    }
+
     return <div className="signup-form">
-               <form action="create-event" method="get">
+               <form onSubmit={submit_callback} action="create-event" method="get">
                    <h2>New event</h2>
                    <div className="form-group">
                        <div className="row">
@@ -17,8 +22,8 @@ function CreateEventForm() {
                    <div className="form-group">
                        <input type="date" className="form-control" name="date" required="required" />
                    </div>
-                   <div class="form-group">
-                       <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Create</button>
+                   <div className="form-group">
+                       <button type="submit" className="btn btn-primary btn-lg btn-block login-btn">Create</button>
                    </div>
                </form>
            </div>
