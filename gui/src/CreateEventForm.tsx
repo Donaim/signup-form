@@ -1,8 +1,10 @@
 
 import React from 'react';
 
+type CallbackEvent = React.FormEvent<HTMLFormElement>
+
 function CreateEventForm() {
-    function submit_callback(e: any) {
+    function submit_callback(e: CallbackEvent) {
         e.preventDefault();
         console.log("TODO");
     }
