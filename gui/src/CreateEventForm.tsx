@@ -2,7 +2,7 @@
 import React from 'react';
 
 function CreateEventForm() {
-    function submit_callback(e) {
+    function submit_callback(e: any) {
         e.preventDefault();
         console.log("TODO");
     }
@@ -12,15 +12,15 @@ function CreateEventForm() {
                    <h2>New event</h2>
                    <div className="form-group">
                        <div className="row">
-                           <div className="col-xs-6"><input type="text" className="form-control" name="first_name" placeholder="First Name" required="required" /></div>
-                           <div className="col-xs-6"><input type="text" className="form-control" name="last_name" placeholder="Last Name" required="required" /></div>
+                           <div className="col-xs-6"><input type="text" className="form-control" name="first_name" placeholder="First Name" required={true} /></div>
+                           <div className="col-xs-6"><input type="text" className="form-control" name="last_name" placeholder="Last Name" required={true} /></div>
                        </div>
                    </div>
                    <div className="form-group">
-                       <input type="email" className="form-control" name="email" placeholder="Email" required="required" />
+                       <input type="email" className="form-control" name="email" placeholder="Email" required={true} />
                    </div>
                    <div className="form-group">
-                       <input type="date" className="form-control" name="date" required="required" />
+                       <input type="date" className="form-control" name="date" required={true} />
                    </div>
                    <div className="form-group">
                        <button type="submit" className="btn btn-primary btn-lg btn-block login-btn">Create</button>
