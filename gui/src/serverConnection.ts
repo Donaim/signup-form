@@ -5,10 +5,17 @@ const SERVER_ADDRESS_PROMISE =
       fetch("https://pastebin.com/raw/szEDkaxU")
       .then(response => response.text());
 
-const sendServerRequest = async (path: string, options: any) => {
-    /* TODO: support options */
+const sendServerRequest = async (path: string, options: object) => {
     const SERVER_ADDRESS = await SERVER_ADDRESS_PROMISE;
-    const r = await fetch(SERVER_ADDRESS + '/' + path);
+
+    let query = '';
+    if (options) {
+        query = '?' + Object.entries(options)
+            .map((x: [string, any]) => encodeURIComponent(x[0]) + '=' + encodeURIComponent(x[1].toString()))
+            .join('&');
+    }
+
+    const r = await fetch(SERVER_ADDRESS + '/' + path + query);
     const text = await r.text();
     return text;
 }

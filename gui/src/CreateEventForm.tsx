@@ -7,8 +7,9 @@ type CallbackEvent = React.FormEvent<HTMLFormElement>
 function CreateEventForm() {
     async function submit_callback(e: CallbackEvent) {
         e.preventDefault();
-        /* TODO: add options */
-        const options = null;
+
+        const formData = new FormData(e.target as HTMLFormElement);
+        const options = Object.fromEntries([...formData.entries()]);
         const text = await sendServerRequest("create-event", options);
         /* TODO: redraw the form */
         console.log("got: ", text);
