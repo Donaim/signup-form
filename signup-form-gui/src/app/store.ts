@@ -1,11 +1,7 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { createStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { formStateReducer } from '../CreateEventForm';
 
-export const store = configureStore({
-    reducer: {
-        // TODO
-        empty: (state) => null,
-    },
-});
+export const store = createStore(formStateReducer);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
