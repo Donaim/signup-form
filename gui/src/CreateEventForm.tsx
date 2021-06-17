@@ -1,12 +1,17 @@
 
 import React from 'react';
+import { sendServerRequest } from './serverConnection';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 
 function CreateEventForm() {
-    function submit_callback(e: CallbackEvent) {
-        // e.preventDefault();
-        console.log("TODO");
+    async function submit_callback(e: CallbackEvent) {
+        e.preventDefault();
+        /* TODO: add options */
+        const options = null;
+        const text = await sendServerRequest("create-event", options);
+        /* TODO: redraw the form */
+        console.log("got: ", text);
     }
 
     return <div className="signup-form">
