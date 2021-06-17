@@ -1,0 +1,39 @@
+
+export enum FormStateType {
+    ReceivingInput,
+    Submitting,
+    ReportingStatus,
+}
+
+export type ReceivingInput = {
+    type: FormStateType.ReceivingInput,
+}
+
+export type Submitting = {
+    type: FormStateType.Submitting,
+}
+
+export type ReportingStatus = {
+    type: FormStateType.ReportingStatus,
+    text: string,
+}
+
+export type FormState = ReceivingInput | Submitting | ReportingStatus
+
+export enum FormActionType {
+    Submit,
+    ShowStatus,
+}
+
+export interface FormSubmit {
+    type: FormActionType.Submit,
+    options: object,
+    handle: any,
+}
+
+export interface FormShowStatus {
+    type: FormActionType.ShowStatus,
+    text: string,
+}
+
+export type FormAction = FormSubmit | FormShowStatus
