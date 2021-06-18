@@ -34,7 +34,7 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
             return;
         }
 
-        let obj = { id: "" };
+        let obj: { [key: string]: unknown } = {};
         try {
             obj = JSON.parse(response);
         } catch {
@@ -42,7 +42,16 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
             return;
         }
 
-        if (obj && 'id' in obj && typeof(obj.id) === 'string') {
+        if ('error' in obj) {
+            if (typeof(obj.error) === 'string') {
+                respond(false, obj.error);
+            } else {
+                defaultError();
+                return;
+            }
+        }
+
+        if ('id' in obj && typeof(obj.id) === 'string') {
             respond(true, obj.id);
             return;
         }
