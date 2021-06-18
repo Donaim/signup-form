@@ -1,6 +1,6 @@
 
 import { sendServerRequest } from '../serverConnection';
-import * as T from './Types';
+import * as T from './types';
 
 const initialState: T.FormState = { type: T.FormStateType.ReceivingInput };
 

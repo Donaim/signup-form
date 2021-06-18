@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitCallback } from './Submit';
-import * as T from './Types';
+import { submitCallback } from './submit';
+import * as T from './types';
 
 const formTemplate = (callback: any) => (body: any) => {
     return <div className="signup-form">

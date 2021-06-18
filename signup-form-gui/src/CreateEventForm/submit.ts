@@ -1,6 +1,6 @@
 
 import React from 'react';
-import * as T from './Types';
+import * as T from './types';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 
