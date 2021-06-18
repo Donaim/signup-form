@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitCallback } from './CreateEventFormSubmit';
-import { formStateReducer } from './CreateEventFormReducer';
-import * as T from './CreateEventFormTypes';
+import { submitCallback } from './Submit';
+import { formStateReducer } from './Reducer';
+import * as T from './Types';
 
 const formSelector = (callback: any) => (state: T.FormState) => {
     switch (state.type) {
