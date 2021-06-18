@@ -12,8 +12,7 @@ function formStateReducer(state: T.FormState = initialState, action: T.FormActio
 
     switch (action.type) {
         case T.FormActionType.Submit:
-            sendServerRequest("create-event", action.options)
-                    .then((response) => action.handle(response));
+            sendServerRequest("create-event", action.options).then(action.handle);
             return {
                 type: T.FormStateType.Submitting,
             } as T.FormState;
