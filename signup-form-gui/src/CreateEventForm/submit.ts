@@ -4,11 +4,21 @@ import { AppDispatch } from '../app/store';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 
+/* Object.fromEntries is not available on all browsers,
+ * so we implement it ourselves for our limited use case */
+function objectFromEntries(array: [string, unknown][]): object {
+    let ret: any = {};
+    for (const [key, val] of array) {
+        ret[key] = val;
+    }
+    return ret;
+}
+
 const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const options = Object.fromEntries([...formData.entries()]);
+    const options = objectFromEntries([...formData.entries()]);
 
     function respond(ok: boolean, text: string) {
         dispatch({ type: T.FormActionType.ShowStatus, ok: ok, text: text });
