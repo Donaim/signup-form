@@ -11,7 +11,7 @@ const sendServerRequest = async (path: string, options: object) => {
     let query = '';
     if (options) {
         query = '?' + Object.entries(options)
-            .map((x: [string, any]) => encodeURIComponent(x[0]) + '=' + encodeURIComponent(x[1].toString()))
+            .map(x => encodeURIComponent(x[0]) + '=' + encodeURIComponent(x[1].toString()))
             .join('&');
     }
 

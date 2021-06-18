@@ -28,7 +28,7 @@ export enum FormActionType {
 export interface FormSubmit {
     type: FormActionType.Submit,
     options: object,
-    handle: any,
+    handle: (s: string) => void,
 }
 
 export interface FormShowStatus {

@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { submitCallback } from './submit';
 import * as T from './types';
 
-const formTemplate = (callback: any) => (body: any) => {
+type CallbackEvent = React.FormEvent<HTMLFormElement>
+type CallbackFn = (e: CallbackEvent) => void
+
+const formTemplate = (callback: CallbackFn) => (body: JSX.Element) => {
     return <div className="signup-form">
         <form onSubmit={callback} action="create-event" method="get">
             {body}
@@ -12,7 +15,7 @@ const formTemplate = (callback: any) => (body: any) => {
     </div>
 }
 
-const inputTemplate = (callback: any) => (submit: any) => {
+const inputTemplate = (callback: CallbackFn) => (submit: JSX.Element) => {
     return formTemplate(callback)(<div>
         <h2>New event</h2>
         <div className="form-group">
@@ -34,7 +37,7 @@ const inputTemplate = (callback: any) => (submit: any) => {
     );
 }
 
-const formSelector = (callback: any) => (state: T.FormState) => {
+const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
     const template = inputTemplate(callback);
 
     switch (state.type) {
