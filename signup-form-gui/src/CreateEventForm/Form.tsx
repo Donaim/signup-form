@@ -5,6 +5,7 @@ import './spinner.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitCallback } from './submit';
 import * as T from './types';
+import { RootState } from '../app/store';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 type CallbackFn = (e: CallbackEvent) => void
@@ -63,7 +64,7 @@ const getForm = (callback: CallbackFn, state: T.FormState) => {
 const CreateEventForm: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const callback = submitCallback(dispatch);
-    const formState = useSelector((x: T.FormState) => x);
+    const formState = useSelector((x: RootState) => x.createEventForm);
     return getForm(callback, formState);
 }
 
