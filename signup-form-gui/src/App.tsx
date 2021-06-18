@@ -6,7 +6,7 @@ import './App.css';
 function App() {
     return (<Router>
                 <Route path="/" exact component={CreateEventForm} />
-                <Route path="/create-event" component={() => <p> TODO </p>} />
+                <Route path="/events" component={() => <p> TODO </p>} />
             </Router>);
 }
 
