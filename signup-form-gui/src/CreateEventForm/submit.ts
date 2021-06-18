@@ -1,6 +1,5 @@
 
-import * as T from './types';
-import { AppDispatch } from '../app/store';
+import { ActionType, AppDispatch } from '../app/store';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 
@@ -21,7 +20,7 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
     const options = objectFromEntries([...formData.entries()]);
 
     function respond(ok: boolean, text: string) {
-        dispatch({ type: T.FormActionType.ShowStatus, ok: ok, text: text });
+        dispatch({ type: ActionType.ShowStatus, ok: ok, text: text });
     }
 
     function defaultError() {
@@ -59,7 +58,7 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
         defaultError();
     }
 
-    dispatch({ type: T.FormActionType.Submit, options: options, handle });
+    dispatch({ type: ActionType.Submit, options: options, handle });
 }
 
 export { submitCallback };
