@@ -1,5 +1,5 @@
 
-import { ActionType, Action } from '../app/action';
+import { ActionType, Action } from '../store/action';
 import * as T from './types';
 
 const initialState: T.FormState = { type: T.FormStateType.ReceivingInput };

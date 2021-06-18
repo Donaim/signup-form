@@ -1,7 +1,7 @@
 
 import { sendServerRequest } from '../serverConnection';
-import { Action, ActionType } from '../app/action';
-import { AppDispatch } from '../app/store';
+import { Action, ActionType } from '../store/action';
+import { AppDispatch } from '../store';
 
 const handleSubmitAction = (storeAPI: unknown) => (next: AppDispatch) => (action: Action) => {
     if (action.type === ActionType.Submit) {
