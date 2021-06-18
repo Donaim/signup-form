@@ -60,7 +60,7 @@ const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
     }
 }
 
-function CreateEventForm() {
+const CreateEventForm: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const callback = submitCallback(dispatch);
     return useSelector(formSelector(callback));
