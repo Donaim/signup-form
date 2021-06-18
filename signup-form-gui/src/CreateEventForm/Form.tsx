@@ -1,5 +1,7 @@
 
 import React from 'react';
+import './Form.css';
+import './spinner.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitCallback } from './submit';
 import * as T from './types';
