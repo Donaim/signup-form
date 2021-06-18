@@ -45,7 +45,7 @@ const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
             return formTemplate(callback)(<p> Response: {state.text} </p>);
 
         case T.FormStateType.Submitting:
-            return template(<p> Loading... </p>);
+            return template(<div className="lds-ring"><div></div><div></div><div></div><div></div></div>);
 
         case T.FormStateType.ReceivingInput:
             return template(<button type="submit" className="btn btn-primary btn-lg btn-block login-btn">Create</button>);
