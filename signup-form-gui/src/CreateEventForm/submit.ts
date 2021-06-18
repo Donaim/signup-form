@@ -1,10 +1,10 @@
 
 import * as T from './types';
+import { AppDispatch } from '../app/store';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
-type DispatchType = (a: T.FormAction) => void
 
-const submitCallback = (dispatch: DispatchType) => (e: CallbackEvent) => {
+const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
