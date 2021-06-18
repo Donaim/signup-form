@@ -1,5 +1,5 @@
 import { createStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { formStateReducer } from '../CreateEventForm/Form';
+import { formStateReducer } from '../CreateEventForm/Reducer';
 
 export const store = createStore(formStateReducer);
 

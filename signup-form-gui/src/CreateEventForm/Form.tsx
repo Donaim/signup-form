@@ -2,7 +2,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitCallback } from './Submit';
-import { formStateReducer } from './Reducer';
 import * as T from './Types';
 
 const formTemplate = (callback: any) => (body: any) => {
@@ -56,4 +55,4 @@ function CreateEventForm() {
     return useSelector(formSelector(callback));
 }
 
-export { CreateEventForm, formStateReducer };
+export { CreateEventForm };
