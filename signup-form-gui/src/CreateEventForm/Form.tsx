@@ -45,7 +45,7 @@ const showStatus = (status: T.ReportingStatus) => {
     }
 }
 
-const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
+const getForm = (callback: CallbackFn, state: T.FormState) => {
     const template = inputTemplate(callback);
 
     switch (state.type) {
@@ -63,7 +63,8 @@ const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
 const CreateEventForm: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const callback = submitCallback(dispatch);
-    return useSelector(formSelector(callback));
+    const formState = useSelector((x: T.FormState) => x);
+    return getForm(callback, formState);
 }
 
 export { CreateEventForm };
