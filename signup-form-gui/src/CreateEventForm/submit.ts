@@ -7,7 +7,7 @@ type CallbackEvent = React.FormEvent<HTMLFormElement>
 /* Object.fromEntries is not available on all browsers,
  * so we implement it ourselves for our limited use case */
 function objectFromEntries(array: [string, unknown][]): object {
-    let ret: any = {};
+    let ret: { [key: string]: unknown } = {};
     for (const [key, val] of array) {
         ret[key] = val;
     }
@@ -28,7 +28,7 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
         respond(false, "Internal server error");
     }
 
-    function handle(response: any) {
+    function handle(response: unknown) {
         if (typeof(response) !== 'string') {
             defaultError();
             return;
