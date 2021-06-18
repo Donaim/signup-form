@@ -42,7 +42,7 @@ const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
 
     switch (state.type) {
         case T.FormStateType.ReportingStatus:
-            return formTemplate(callback)(<p> Response: {state.text} </p>);
+            return formTemplate(callback)(<p className="center"> Your event id: <br></br> {state.text} </p>);
 
         case T.FormStateType.Submitting:
             return template(<div className="lds-ring"><div></div><div></div><div></div><div></div></div>);
