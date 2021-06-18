@@ -37,12 +37,20 @@ const inputTemplate = (callback: CallbackFn) => (submit: JSX.Element) => {
     );
 }
 
+const showStatus = (status: T.ReportingStatus) => {
+    if (status.ok) {
+        return <p className="center"> Your event id: <br></br> {status.text} </p>;
+    } else {
+        return <p className="center"> Error: <br></br> {status.text} </p>;
+    }
+}
+
 const formSelector = (callback: CallbackFn) => (state: T.FormState) => {
     const template = inputTemplate(callback);
 
     switch (state.type) {
         case T.FormStateType.ReportingStatus:
-            return formTemplate(callback)(<p className="center"> Your event id: <br></br> {state.text} </p>);
+            return formTemplate(callback)(showStatus(state));
 
         case T.FormStateType.Submitting:
             return template(<div className="lds-ring"><div></div><div></div><div></div><div></div></div>);

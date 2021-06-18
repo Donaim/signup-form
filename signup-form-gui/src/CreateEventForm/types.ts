@@ -15,6 +15,7 @@ export type Submitting = {
 
 export type ReportingStatus = {
     type: FormStateType.ReportingStatus,
+    ok: boolean,
     text: string,
 }
 
@@ -33,6 +34,7 @@ export interface FormSubmit {
 
 export interface FormShowStatus {
     type: FormActionType.ShowStatus,
+    ok: boolean,
     text: string,
 }
 

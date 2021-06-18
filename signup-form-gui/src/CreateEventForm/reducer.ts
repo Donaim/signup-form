@@ -19,6 +19,7 @@ function formStateReducer(state: T.FormState = initialState, action: T.FormActio
         case T.FormActionType.ShowStatus:
             return {
                 type: T.FormStateType.ReportingStatus,
+                ok: action.ok,
                 text: action.text,
             } as T.FormState;
         default:
