@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateEventForm } from './CreateEventForm/Form';
+import { CreateEventForm } from './CreateEventForm';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 

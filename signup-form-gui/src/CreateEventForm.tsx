@@ -1,11 +1,11 @@
 
 import React from 'react';
-import './Form.css';
-import './spinner.css';
+import './CreateEventForm.css';
+import './CreateEventForm/spinner.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitCallback } from './submit';
-import * as T from './types';
-import { RootState } from '../store';
+import { submitCallback } from './CreateEventForm/submit';
+import * as T from './CreateEventForm/types';
+import { RootState } from './store';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 type CallbackFn = (e: CallbackEvent) => void
