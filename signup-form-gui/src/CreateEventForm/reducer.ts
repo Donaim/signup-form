@@ -13,15 +13,17 @@ function formStateReducer(state: T.FormState = initialState, action: T.FormActio
     switch (action.type) {
         case T.FormActionType.Submit:
             sendServerRequest("create-event", action.options).then(action.handle);
-            return {
+            const ret1: T.FormState = {
                 type: T.FormStateType.Submitting,
-            } as T.FormState;
+            };
+            return ret1;
         case T.FormActionType.ShowStatus:
-            return {
+            const ret2: T.FormState = {
                 type: T.FormStateType.ReportingStatus,
                 ok: action.ok,
                 text: action.text,
-            } as T.FormState;
+            };
+            return ret2;
         default:
             throw new Error("Impossible");
     }
