@@ -1,30 +1,15 @@
-import { createStore, combineReducers } from '@reduxjs/toolkit';
+import { createStore, combineReducers, applyMiddleware, StoreEnhancer } from '@reduxjs/toolkit';
 import { formStateReducer } from '../CreateEventForm/reducer';
-
-export enum ActionType {
-    Submit,
-    ShowStatus,
-}
-
-export interface Submit {
-    type: ActionType.Submit,
-    options: object,
-    handle: (s: string) => void,
-}
-
-export interface ShowStatus {
-    type: ActionType.ShowStatus,
-    ok: boolean,
-    text: string,
-}
-
-export type Action = Submit | ShowStatus
+import { handleSubmitAction } from '../CreateEventForm/handleSubmit';
 
 const rootReducer = combineReducers({
     createEventForm: formStateReducer,
 });
 
-export const store = createStore(rootReducer);
+const enhancer: StoreEnhancer<{ dispatch: unknown; }, {}>
+    = applyMiddleware(handleSubmitAction);
+
+export const store = createStore(rootReducer, enhancer);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

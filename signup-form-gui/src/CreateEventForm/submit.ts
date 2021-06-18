@@ -1,5 +1,6 @@
 
-import { ActionType, AppDispatch } from '../app/store';
+import { AppDispatch } from '../app/store';
+import { ActionType } from '../app/action';
 
 type CallbackEvent = React.FormEvent<HTMLFormElement>
 

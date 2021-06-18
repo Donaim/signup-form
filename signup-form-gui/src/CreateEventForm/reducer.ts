@@ -1,6 +1,5 @@
 
-import { sendServerRequest } from '../serverConnection';
-import { ActionType, Action } from '../app/store';
+import { ActionType, Action } from '../app/action';
 import * as T from './types';
 
 const initialState: T.FormState = { type: T.FormStateType.ReceivingInput };
@@ -8,7 +7,6 @@ const initialState: T.FormState = { type: T.FormStateType.ReceivingInput };
 function formStateReducer(state: T.FormState = initialState, action: Action) {
     switch (action.type) {
         case ActionType.Submit:
-            sendServerRequest("create-event", action.options).then(action.handle);
             const ret1: T.FormState = {
                 type: T.FormStateType.Submitting,
             };
