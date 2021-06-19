@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { getDynamic, setDynamic } from './dynamicState';
 import App from './App';
 
 /*******
@@ -13,41 +14,19 @@ const renderApp = () => render(
         <App />
     </Provider>);
 
-/* dynamicState is for passing
- * hooks inside mocked objects */
-const dynamicState = {};
-
-function getDynamic(name) {
-    return dynamicState[name];
-}
-
-function setDynamic(name, value, body) {
-    const previous = dynamicState[name];
-    try {
-        dynamicState[name] = value;
-        return body();
-    } finally {
-        dynamicState[name] = previous;
-    }
-}
-
-const sendServerRequestHook = () => 0;
-const mockGetDynamic = getDynamic;
-
 /*****
  * Mocks
  *****/
+
+const mockGetDynamic = getDynamic;
 
 jest.mock("./serverConnection", () => {
     return {
         __esModule: true,
         sendServerRequest: async (path, options) => {
-            console.log("Sending server request", path, options);
-
-            const hook = mockGetDynamic(sendServerRequestHook);
+            const hook = mockGetDynamic('sendServerRequestHook');
             hook && hook(path, options);
-
-            return 'example-id';
+            return '{ id: "example-id" }';
         },
     };
 });
@@ -56,19 +35,19 @@ jest.mock("./serverConnection", () => {
  * Tests
  ******/
 
-test('renders title', () => {
+it('renders title', () => {
     const { getByText } = renderApp();
 
     expect(getByText(/new event/i)).toBeInTheDocument();
 });
 
-test('renders sumbit button', () => {
+it('renders sumbit button', () => {
     const { getByText } = renderApp();
 
     expect(getByText("Create")).toBeInTheDocument();
 });
 
-test("testing library sanity check", done => {
+it("passes testing library sanity check", done => {
     function handleClick() {
         done();
     }
@@ -81,14 +60,14 @@ test("testing library sanity check", done => {
     fireEvent.click(node);
 });
 
-test('submits server request', (done) => {
+it('submits server request', (done) => {
     const { getByText } = renderApp();
 
     const btn = getByText("Create");
 
     expect(btn).toBeInTheDocument();
 
-    setDynamic(sendServerRequestHook,
+    setDynamic('sendServerRequestHook',
                (path, options) => done(),
                () => fireEvent.click(btn));
 });
