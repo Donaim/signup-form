@@ -18,18 +18,7 @@ const renderApp = () => render(
  * Mocks
  *****/
 
-const mockGetDynamic = getDynamic;
-
-jest.mock("./serverConnection", () => {
-    return {
-        __esModule: true,
-        sendServerRequest: async (path, options) => {
-            const hook = mockGetDynamic('sendServerRequestHook');
-            hook && hook(path, options);
-            return JSON.stringify({ id: "example-id" });
-        },
-    };
-});
+jest.mock("./serverConnection");
 
 /******
  * Tests
