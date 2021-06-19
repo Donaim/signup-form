@@ -26,7 +26,7 @@ jest.mock("./serverConnection", () => {
         sendServerRequest: async (path, options) => {
             const hook = mockGetDynamic('sendServerRequestHook');
             hook && hook(path, options);
-            return '{ id: "example-id" }';
+            return JSON.stringify({ id: "example-id" });
         },
     };
 });
