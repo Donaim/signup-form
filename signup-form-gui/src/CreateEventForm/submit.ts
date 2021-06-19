@@ -21,7 +21,7 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
     const options = objectFromEntries([...formData.entries()]);
 
     function respond(ok: boolean, text: string) {
-        dispatch({ type: ActionType.ShowStatus, ok: ok, text: text });
+        dispatch({ type: ActionType.CreateEventFormShowStatus, ok: ok, text: text });
     }
 
     function defaultError() {
@@ -59,7 +59,7 @@ const submitCallback = (dispatch: AppDispatch) => (e: CallbackEvent) => {
         defaultError();
     }
 
-    dispatch({ type: ActionType.Submit, options: options, handle });
+    dispatch({ type: ActionType.CreateEventFormSubmit, options: options, handle });
 }
 
 export { submitCallback };

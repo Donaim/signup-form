@@ -6,12 +6,12 @@ const initialState: T.FormState = { type: T.FormStateType.ReceivingInput };
 
 function formStateReducer(state: T.FormState = initialState, action: Action) {
     switch (action.type) {
-        case ActionType.Submit:
+        case ActionType.CreateEventFormSubmit:
             const ret1: T.FormState = {
                 type: T.FormStateType.Submitting,
             };
             return ret1;
-        case ActionType.ShowStatus:
+        case ActionType.CreateEventFormShowStatus:
             const ret2: T.FormState = {
                 type: T.FormStateType.ReportingStatus,
                 ok: action.ok,
