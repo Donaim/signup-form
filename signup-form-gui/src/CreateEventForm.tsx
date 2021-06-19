@@ -54,7 +54,10 @@ const getForm = (callback: CallbackFn, state: T.FormState) => {
             return formTemplate(callback)(showStatus(state));
 
         case T.FormStateType.Submitting:
-            return template(<div className="lds-ring"><div></div><div></div><div></div><div></div></div>);
+            return template(<button type="submit" className="btn btn-primary btn-lg btn-block login-btn">
+                Loading <div className="space"> </div>
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </button>);
 
         case T.FormStateType.ReceivingInput:
             return template(<button type="submit" className="btn btn-primary btn-lg btn-block login-btn">Create</button>);
