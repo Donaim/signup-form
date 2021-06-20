@@ -2,7 +2,11 @@
 const request = require('supertest');
 const assert = require("assert");
 const sinon = require("sinon");
+const mock = require("mock-require");
 
+mock("../src/mongoInterface", { insertEvent: async () => undefined });
+
+const mongo = require("../src/mongoInterface");
 const database = require("../src/database");
 const app = require("../src/app").app;
 
