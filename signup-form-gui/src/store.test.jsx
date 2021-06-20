@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { getStore } from './store';
 import { ActionType } from './store/action';
 import { getDynamic, setDynamic } from './dynamicState';
 import App from './App';
@@ -10,7 +10,7 @@ import App from './App';
  * Helper functions
  *******/
 
-const renderApp = () => render(
+const renderApp = (store) => render(
     <Provider store={store}>
         <App />
     </Provider>);
@@ -26,9 +26,10 @@ jest.mock("./serverConnection");
  ******/
 
 it('resets state on Logout event', (done) => {
+    const store = getStore();
     const initialState = JSON.stringify(store.getState());
 
-    const { getByText } = renderApp();
+    const { getByText } = renderApp(store);
 
     const btn = getByText("Create");
 

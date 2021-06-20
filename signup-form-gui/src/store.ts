@@ -19,7 +19,8 @@ const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
 const enhancer: StoreEnhancer<{ dispatch: unknown; }, {}>
     = applyMiddleware(handleSubmitAction);
 
-export const store = createStore(rootReducer, enhancer);
+export const getStore = () => createStore(rootReducer, enhancer);
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+const store0 = getStore();
+export type AppDispatch = typeof store0.dispatch;
+export type RootState = ReturnType<typeof store0.getState>;

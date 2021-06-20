@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { getStore } from './store';
 import { getDynamic, setDynamic } from './dynamicState';
 import App from './App';
 
@@ -10,7 +10,7 @@ import App from './App';
  *******/
 
 const renderApp = () => render(
-    <Provider store={store}>
+    <Provider store={getStore()}>
         <App />
     </Provider>);
 

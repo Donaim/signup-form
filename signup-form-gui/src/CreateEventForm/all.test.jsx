@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from '../store';
+import { getStore } from '../store';
 import { Action, ActionType } from '../store/action';
 import { getDynamic, setDynamic } from '../dynamicState';
 import { CreateEventForm } from '../CreateEventForm';
@@ -12,12 +12,10 @@ import App from '../App';
  * Helper functions
  *******/
 
-const renderForm = () => render(
+const renderForm = (store) => render(
     <Provider store={store}>
         <CreateEventForm />
     </Provider>);
-
-const resetStore = () => store.dispatch({ type: ActionType.Logout });
 
 /*****
  * Mocks
@@ -30,21 +28,19 @@ jest.mock('./handleSubmit');
  ******/
 
 it('renders title', () => {
-    const { getByText } = renderForm();
+    const { getByText } = renderForm(getStore());
 
     expect(getByText(/new event/i)).toBeInTheDocument();
 });
 
 it('renders sumbit button', () => {
-    const { getByText } = renderForm();
+    const { getByText } = renderForm(getStore());
 
     expect(getByText("Create")).toBeInTheDocument();
 });
 
 it('submits server request', (done) => {
-    resetStore();
-
-    const { getByText } = renderForm();
+    const { getByText } = renderForm(getStore());
 
     const btn = getByText("Create");
 
@@ -57,9 +53,7 @@ it('submits server request', (done) => {
 });
 
 it('submits server request through middleware', (done) => {
-    resetStore();
-
-    const { getByText } = renderForm();
+    const { getByText } = renderForm(getStore());
 
     const btn = getByText("Create");
 
@@ -81,9 +75,7 @@ it('submits server request through middleware', (done) => {
 });
 
 it('arrives at final state eventually', (done) => {
-    resetStore();
-
-    const { getByText } = renderForm();
+    const { getByText } = renderForm(getStore());
 
     const btn = getByText("Create");
 
@@ -109,9 +101,7 @@ it('arrives at final state eventually', (done) => {
 });
 
 it('correctly sequences events', (done) => {
-    resetStore();
-
-    const { getByText } = renderForm();
+    const { getByText } = renderForm(getStore());
 
     const btn = getByText("Create");
 
@@ -143,9 +133,8 @@ it('correctly sequences events', (done) => {
 });
 
 it('hides create button on submit', (done) => {
-    resetStore();
-
-    const { queryByText } = renderForm();
+    const store = getStore();
+    const { queryByText } = renderForm(store);
 
     const btn = queryByText("Create");
     expect(btn).toBeInTheDocument();
@@ -165,16 +154,15 @@ it('hides create button on submit', (done) => {
 
     setTimeout(() => {
         done();
-        const { queryByText, queryAllByText } = renderForm();
+        const { queryByText, queryAllByText } = renderForm(store);
         expect(queryByText("Create")).toBeNull();
     }, 0);
 
 });
 
 it('shows loading on submit', (done) => {
-    resetStore();
-
-    const { queryByText } = renderForm();
+    const store = getStore();
+    const { queryByText } = renderForm(store);
 
     const btn = queryByText("Create");
     expect(btn).toBeInTheDocument();
@@ -198,7 +186,7 @@ it('shows loading on submit', (done) => {
     setTimeout(() => {
         done();
 
-        const { queryByText, queryAllByText } = renderForm();
+        const { queryByText, queryAllByText } = renderForm(store);
         expect(queryByText("Create")).toBeNull();
 
         expect(queryAllByText(/Loading/i).length == 0).toBeFalsy();
@@ -211,9 +199,8 @@ it('shows loading on submit', (done) => {
 });
 
 it('shows id after submit', (done) => {
-    resetStore();
-
-    const { queryByText } = renderForm();
+    const store = getStore();
+    const { queryByText } = renderForm(store);
 
     const btn = queryByText("Create");
     expect(btn).toBeInTheDocument();
@@ -227,7 +214,7 @@ it('shows id after submit', (done) => {
         setTimeout(() => {
             done();
 
-            const { queryByText, queryAllByText } = renderForm();
+            const { queryByText, queryAllByText } = renderForm(store);
             expect(queryByText("Create")).toBeNull();
             expect(queryByText("Loading")).toBeNull();
 
@@ -261,9 +248,8 @@ it('shows id after submit', (done) => {
 });
 
 it('shows error on server fail', (done) => {
-    resetStore();
-
-    const { queryByText } = renderForm();
+    const store = getStore();
+    const { queryByText } = renderForm(store);
 
     const btn = queryByText("Create");
     expect(btn).toBeInTheDocument();
@@ -277,7 +263,7 @@ it('shows error on server fail', (done) => {
         setTimeout(() => {
             done();
 
-            const { queryByText, queryAllByText } = renderForm();
+            const { queryByText, queryAllByText } = renderForm(store);
             expect(queryByText("Create")).toBeNull();
             expect(queryByText("Loading")).toBeNull();
 
@@ -311,9 +297,8 @@ it('shows error on server fail', (done) => {
 });
 
 it('shows error on bad server response', (done) => {
-    resetStore();
-
-    const { queryByText } = renderForm();
+    const store = getStore();
+    const { queryByText } = renderForm(store);
 
     const btn = queryByText("Create");
     expect(btn).toBeInTheDocument();
@@ -327,7 +312,7 @@ it('shows error on bad server response', (done) => {
         setTimeout(() => {
             done();
 
-            const { queryByText, queryAllByText } = renderForm();
+            const { queryByText, queryAllByText } = renderForm(store);
             expect(queryByText("Create")).toBeNull();
             expect(queryByText("Loading")).toBeNull();
 
