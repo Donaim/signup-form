@@ -21,7 +21,10 @@ const validateCreateEvent = (req, res, next) => {
         if (status) {
             next();
         } else {
-            res.status(412).send({ error: JSON.stringify(err) });
+            res.status(412).send({
+                error: 'Invalid inputs:' +
+                    Object.entries(err.errors).map(x => ' ' + x[0].toString()).toString()
+            });
         }
     });
 }
