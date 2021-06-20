@@ -1,6 +1,9 @@
 
 const request = require('supertest');
 const assert = require("assert");
+const sinon = require("sinon");
+
+const database = require("../src/database");
 const app = require("../src/app").app;
 
 describe('GET /bad_path', () => {
@@ -48,6 +51,8 @@ describe('GET /create-event', () => {
     const invalidEmailQuery2 = '/create-event?first_name=a&last_name=b&email=no_at_symbol&date=2000-01-01';
     const invalidDateQuery = '/create-event?first_name=a&last_name=b&email=abc@gmail.com&date=notadate';
     const tooFewParamsQuery = '/create-event?first_name=a&last_name=b&email=abc@gmail.com';
+
+    sinon.stub(database, "getRequestId").returns("stubbed-request-id");
 
     const test_invalid_query = q => done => {
         function callback(response) {
