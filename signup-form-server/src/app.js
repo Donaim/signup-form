@@ -7,6 +7,10 @@ app.get('/ping', (req, res) => {
     res.send('pong');
 });
 
+app.get('/create-event', (req, res) => {
+    res.send({ id: req.databaseid });
+});
+
 function start() {
     app.listen(port, () => {
         console.log(`Example app listening at http://localhost:${port}`);
