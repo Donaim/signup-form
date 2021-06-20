@@ -1,6 +1,7 @@
 
 const express = require('express');
 const validator = require('./validate');
+const database = require('./database');
 
 const app = express();
 const port = 3001;
@@ -29,8 +30,8 @@ const validateCreateEvent = (req, res, next) => {
     });
 }
 
-app.get('/create-event', [validateCreateEvent], (req, res) => {
-    res.send({ id: req.databaseid });
+app.get('/create-event', [validateCreateEvent, database.handleCreateEvent], (req, res) => {
+    res.send({ id: database.getRequestId(req) });
 });
 
 function start() {
