@@ -10,6 +10,8 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "express": "^4.17.1",
+    "mock-require": "^3.0.3",
+    "mongo-mock": "^4.0.0",
     "mongodb": "^3.6.9",
     "sinon": "^11.1.1",
     "validatorjs": "^3.22.1"
